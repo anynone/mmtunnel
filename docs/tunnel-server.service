@@ -1,0 +1,27 @@
+[Unit]
+Description=MM Socket Tunnel Server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=tunnel
+Group=tunnel
+WorkingDirectory=/opt/mmsocket
+ExecStart=/opt/mmsocket/bin/tunnel-server -config /opt/mmsocket/config/server.yaml
+Restart=always
+RestartSec=5
+
+# Keep logs in journald.
+StandardOutput=journal
+StandardError=journal
+
+# Basic hardening. Relax these if your deployment needs broader filesystem access.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/opt/mmsocket
+
+[Install]
+WantedBy=multi-user.target

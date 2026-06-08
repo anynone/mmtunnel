@@ -1,0 +1,14 @@
+server:
+  listen: ":8080"
+  logLevel: info
+  systemPathPrefix: /_tunnel
+  requestTimeout: 60s
+  targetConnectTimeout: 10s
+  tunnelIdleTimeout: 60s
+  pingInterval: 30s
+  pongTimeout: 10s
+  maxRequestBodySize: 100mb
+
+clients:
+  - id: dev-machine-01
+    token: "123456"

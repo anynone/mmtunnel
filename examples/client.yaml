@@ -1,0 +1,12 @@
+client:
+  id: dev-machine-company
+  token: "e3ab05a846a52dfea0d7fbacaed5c2d708f1f58fe3d66c3fd43e5e062b34f210"
+  server: "wss://callback.anynone.cn/_tunnel/connect"
+  reconnectInterval: 5s
+
+tunnels:
+  - name: api
+    publicPath: /payment/api
+    target: http://127.0.0.1:9098
+    stripPath: true
+
