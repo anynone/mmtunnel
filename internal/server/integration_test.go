@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	tunnelclient "mmsocket/internal/client"
-	"mmsocket/internal/config"
-	"mmsocket/internal/protocol"
-	tunnelserver "mmsocket/internal/server"
+	tunnelclient "mmtunnel/internal/client"
+	"mmtunnel/internal/config"
+	"mmtunnel/internal/protocol"
+	tunnelserver "mmtunnel/internal/server"
 )
 
 func TestHTTPForwardingAndPathStripping(t *testing.T) {

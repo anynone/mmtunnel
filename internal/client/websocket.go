@@ -7,7 +7,7 @@ import (
 	"strings"
 	"sync"
 
-	"mmsocket/internal/protocol"
+	"mmtunnel/internal/protocol"
 )
 
 type targetWebSocket struct {

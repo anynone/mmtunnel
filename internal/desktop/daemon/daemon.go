@@ -9,10 +9,10 @@ import (
 	"os"
 	"strings"
 
-	"mmsocket/internal/config"
-	"mmsocket/internal/desktop/profile"
-	"mmsocket/internal/desktop/runtime"
-	"mmsocket/internal/protocol"
+	"mmtunnel/internal/config"
+	"mmtunnel/internal/desktop/profile"
+	"mmtunnel/internal/desktop/runtime"
+	"mmtunnel/internal/protocol"
 )
 
 type API struct {
@@ -110,7 +110,7 @@ func (a *API) handleImport(w http.ResponseWriter, r *http.Request) {
 	if name == "" {
 		name = id
 	}
-	tmp, err := os.CreateTemp("", "mmsocket-import-*.yaml")
+	tmp, err := os.CreateTemp("", "mmtunnel-import-*.yaml")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -205,7 +205,7 @@ func (a *API) handleExport(w http.ResponseWriter, r *http.Request, id string) {
 		return
 	}
 	store := profile.Store{ActiveProfileID: p.ID, Profiles: []profile.Profile{p}}
-	tmp, err := os.CreateTemp("", "mmsocket-cli-*.yaml")
+	tmp, err := os.CreateTemp("", "mmtunnel-cli-*.yaml")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

@@ -1,5 +1,5 @@
 [Unit]
-Description=MM Socket Tunnel Server
+Description=MM Tunnel Server
 After=network-online.target
 Wants=network-online.target
 
@@ -7,8 +7,8 @@ Wants=network-online.target
 Type=simple
 User=tunnel
 Group=tunnel
-WorkingDirectory=/opt/mmsocket
-ExecStart=/opt/mmsocket/bin/tunnel-server -config /opt/mmsocket/config/server.yaml
+WorkingDirectory=/opt/mmtunnel
+ExecStart=/opt/mmtunnel/bin/tunnel-server -config /opt/mmtunnel/config/server.yaml
 Restart=always
 RestartSec=5
 
@@ -21,7 +21,7 @@ NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=full
 ProtectHome=true
-ReadWritePaths=/opt/mmsocket
+ReadWritePaths=/opt/mmtunnel
 
 [Install]
 WantedBy=multi-user.target

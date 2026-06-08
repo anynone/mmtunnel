@@ -1,0 +1,106 @@
+name: Desktop Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build-desktop:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: macos-x64
+            runner: macos-15-intel
+            target: x86_64-apple-darwin
+            goos: darwin
+            goarch: amd64
+            sidecarExt: ""
+          - name: macos-aarch64
+            runner: macos-latest
+            target: aarch64-apple-darwin
+            goos: darwin
+            goarch: arm64
+            sidecarExt: ""
+          - name: linux-x64
+            runner: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+            goos: linux
+            goarch: amd64
+            sidecarExt: ""
+          - name: linux-aarch64
+            runner: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
+            goos: linux
+            goarch: arm64
+            sidecarExt: ""
+          - name: windows-x64
+            runner: windows-latest
+            target: x86_64-pc-windows-msvc
+            goos: windows
+            goarch: amd64
+            sidecarExt: ".exe"
+          - name: windows-aarch64
+            runner: windows-11-arm
+            target: aarch64-pc-windows-msvc
+            goos: windows
+            goarch: arm64
+            sidecarExt: ".exe"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install Linux dependencies
+        if: startsWith(matrix.runner, 'ubuntu-')
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev patchelf
+
+      - name: Install desktop dependencies
+        working-directory: desktop
+        run: npm ci
+
+      - name: Build tunnel daemon sidecar
+        shell: bash
+        run: |
+          mkdir -p desktop/src-tauri/binaries
+          output="desktop/src-tauri/binaries/tunnel-daemon-${{ matrix.target }}${{ matrix.sidecarExt }}"
+          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} CGO_ENABLED=0 GOCACHE="${RUNNER_TEMP}/go-build" go build -buildvcs=false -o "${output}" ./cmd/tunnel-daemon
+          chmod +x "${output}"
+
+      - name: Build and upload desktop bundles
+        uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: desktop
+          releaseId: ${{ github.event.release.id }}
+          tagName: ${{ github.event.release.tag_name }}
+          args: --target ${{ matrix.target }}
+          uploadUpdaterJson: false
+          retryAttempts: 2
+          releaseAssetNamePattern: "[name]-[version]-${{ matrix.target }}-[bundle][ext]"

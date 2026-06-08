@@ -9,9 +9,9 @@ import (
 	"strings"
 	"time"
 
-	"mmsocket/internal/config"
-	"mmsocket/internal/protocol"
-	"mmsocket/internal/validate"
+	"mmtunnel/internal/config"
+	"mmtunnel/internal/protocol"
+	"mmtunnel/internal/validate"
 )
 
 type Server struct {

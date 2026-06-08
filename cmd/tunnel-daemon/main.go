@@ -12,9 +12,9 @@ import (
 	"syscall"
 	"time"
 
-	"mmsocket/internal/desktop/daemon"
-	desktopruntime "mmsocket/internal/desktop/runtime"
-	"mmsocket/internal/logging"
+	"mmtunnel/internal/desktop/daemon"
+	desktopruntime "mmtunnel/internal/desktop/runtime"
+	"mmtunnel/internal/logging"
 )
 
 func main() {
@@ -57,7 +57,7 @@ func defaultProfilePath() string {
 	if err != nil {
 		return "profiles.json"
 	}
-	return filepath.Join(dir, "mmsocket", "profiles.json")
+	return filepath.Join(dir, "mmtunnel", "profiles.json")
 }
 
 var _ = slog.LevelInfo

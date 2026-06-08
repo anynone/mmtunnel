@@ -27,7 +27,7 @@ The desktop UI does not require users to edit YAML for normal operation. Users c
 By default the daemon stores profiles at:
 
 ```text
-$XDG_CONFIG_HOME/mmsocket/profiles.json
+$XDG_CONFIG_HOME/mmtunnel/profiles.json
 ```
 
 or the platform-specific directory returned by Go's `os.UserConfigDir()`.
@@ -70,7 +70,7 @@ npm test
 
 ## Tauri
 
-The Tauri scaffold lives in `desktop/src-tauri`. It is configured to use the built frontend in `desktop/dist` and to bundle `bin/tunnel-daemon` as an external binary.
+The Tauri scaffold lives in `desktop/src-tauri`. It is configured to use the built frontend in `desktop/dist` and to bundle `desktop/src-tauri/binaries/tunnel-daemon-<target-triple>` as an external sidecar binary.
 
 Typical commands after installing the Tauri CLI and dependencies:
 

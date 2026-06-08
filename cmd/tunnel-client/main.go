@@ -8,10 +8,10 @@ import (
 	"os/signal"
 	"syscall"
 
-	"mmsocket/internal/client"
-	"mmsocket/internal/config"
-	desktopruntime "mmsocket/internal/desktop/runtime"
-	"mmsocket/internal/logging"
+	"mmtunnel/internal/client"
+	"mmtunnel/internal/config"
+	desktopruntime "mmtunnel/internal/desktop/runtime"
+	"mmtunnel/internal/logging"
 )
 
 func main() {

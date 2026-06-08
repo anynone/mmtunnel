@@ -1,5 +1,5 @@
 export function daemonBase() {
-  return localStorage.getItem("mmsocket.daemon") || "http://127.0.0.1:19081";
+  return localStorage.getItem("mmtunnel.daemon") || "http://127.0.0.1:19081";
 }
 
 export function blankProfile() {

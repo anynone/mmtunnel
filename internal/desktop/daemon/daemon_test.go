@@ -8,10 +8,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"mmsocket/internal/config"
-	"mmsocket/internal/desktop/profile"
-	"mmsocket/internal/desktop/runtime"
-	"mmsocket/internal/protocol"
+	"mmtunnel/internal/config"
+	"mmtunnel/internal/desktop/profile"
+	"mmtunnel/internal/desktop/runtime"
+	"mmtunnel/internal/protocol"
 )
 
 func TestProfileCRUDAndRuntimeStatus(t *testing.T) {

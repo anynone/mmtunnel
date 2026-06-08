@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"mmsocket/internal/protocol"
+	"mmtunnel/internal/protocol"
 )
 
 type Session struct {

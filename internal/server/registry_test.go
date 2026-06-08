@@ -6,7 +6,7 @@ import (
 
 	"log/slog"
 
-	"mmsocket/internal/protocol"
+	"mmtunnel/internal/protocol"
 )
 
 func TestRegistryRejectsConflictingPath(t *testing.T) {

@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"mmsocket/internal/config"
+	"mmtunnel/internal/config"
 )
 
 func TestManagerStartStopRestartAndEvents(t *testing.T) {

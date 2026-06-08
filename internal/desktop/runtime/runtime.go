@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"mmsocket/internal/client"
-	"mmsocket/internal/config"
+	"mmtunnel/internal/client"
+	"mmtunnel/internal/config"
 )
 
 type State string

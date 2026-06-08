@@ -16,7 +16,7 @@ fn main() {
 
             let _tray = TrayIconBuilder::new()
                 .menu(&menu)
-                .tooltip("MM Socket")
+                .tooltip("MM Tunnel")
                 .on_menu_event(|app, event| match event.id.as_ref() {
                     "open" => {
                         if let Some(window) = app.get_webview_window("main") {

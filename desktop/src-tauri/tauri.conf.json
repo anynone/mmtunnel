@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "MM Socket",
+  "productName": "MM Tunnel",
   "version": "0.1.0",
-  "identifier": "cn.anynone.mmsocket",
+  "identifier": "cn.anynone.mmtunnel",
   "build": {
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "MM Socket",
+        "title": "MM Tunnel",
         "width": 1180,
         "height": 760,
         "minWidth": 900,
@@ -25,9 +25,15 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": [
+      "dmg",
+      "appimage",
+      "deb",
+      "nsis",
+      "msi"
+    ],
     "externalBin": [
-      "../../bin/tunnel-daemon"
+      "binaries/tunnel-daemon"
     ]
   }
 }

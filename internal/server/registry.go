@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"mmsocket/internal/protocol"
-	"mmsocket/internal/validate"
+	"mmtunnel/internal/protocol"
+	"mmtunnel/internal/validate"
 )
 
 type Route struct {

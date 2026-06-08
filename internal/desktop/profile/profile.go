@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"mmsocket/internal/config"
-	"mmsocket/internal/validate"
+	"mmtunnel/internal/config"
+	"mmtunnel/internal/validate"
 )
 
 type TunnelStatus string

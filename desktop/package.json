@@ -1,5 +1,5 @@
 {
-  "name": "mmsocket-desktop",
+  "name": "mmtunnel-desktop",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -10,5 +10,7 @@
     "tauri:dev": "tauri dev",
     "tauri:build": "tauri build"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.11.2"
+  }
 }

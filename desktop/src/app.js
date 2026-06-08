@@ -48,7 +48,7 @@ function render() {
     <section class="shell">
       <header class="topbar">
         <div>
-          <h1>MM Socket</h1>
+          <h1>MM Tunnel</h1>
           <p>${profile.name || "New profile"} · ${profile.client.server || "No server configured"}</p>
         </div>
         <strong class="status ${state.runtime.state}">${renderStatusLabel(state.runtime.state)}</strong>

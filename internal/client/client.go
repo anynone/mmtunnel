@@ -14,8 +14,8 @@ import (
 	"sync"
 	"time"
 
-	"mmsocket/internal/config"
-	"mmsocket/internal/protocol"
+	"mmtunnel/internal/config"
+	"mmtunnel/internal/protocol"
 )
 
 type Client struct {

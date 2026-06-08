@@ -8,9 +8,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"mmsocket/internal/config"
-	"mmsocket/internal/logging"
-	"mmsocket/internal/server"
+	"mmtunnel/internal/config"
+	"mmtunnel/internal/logging"
+	"mmtunnel/internal/server"
 )
 
 func main() {

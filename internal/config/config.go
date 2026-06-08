@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"mmsocket/internal/logging"
-	"mmsocket/internal/validate"
+	"mmtunnel/internal/logging"
+	"mmtunnel/internal/validate"
 )
 
 type ServerConfig struct {
