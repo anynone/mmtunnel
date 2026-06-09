@@ -1,0 +1,12 @@
+# Node dependencies
+desktop/node_modules/
+
+# Desktop frontend build output
+desktop/dist/
+
+# Tauri and Rust build output
+desktop/src-tauri/target/
+desktop/src-tauri/gen/
+
+# Generated Tauri sidecar binaries
+desktop/src-tauri/binaries/
