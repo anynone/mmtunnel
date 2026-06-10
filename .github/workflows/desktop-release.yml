@@ -21,36 +21,42 @@ jobs:
             goos: darwin
             goarch: amd64
             sidecarExt: ""
+            sidecarLdflags: ""
           - name: macos-aarch64
             runner: macos-latest
             target: aarch64-apple-darwin
             goos: darwin
             goarch: arm64
             sidecarExt: ""
+            sidecarLdflags: ""
           - name: linux-x64
             runner: ubuntu-24.04
             target: x86_64-unknown-linux-gnu
             goos: linux
             goarch: amd64
             sidecarExt: ""
+            sidecarLdflags: ""
           - name: linux-aarch64
             runner: ubuntu-24.04-arm
             target: aarch64-unknown-linux-gnu
             goos: linux
             goarch: arm64
             sidecarExt: ""
+            sidecarLdflags: ""
           - name: windows-x64
             runner: windows-latest
             target: x86_64-pc-windows-msvc
             goos: windows
             goarch: amd64
             sidecarExt: ".exe"
+            sidecarLdflags: "-H=windowsgui"
           - name: windows-aarch64
             runner: windows-11-arm
             target: aarch64-pc-windows-msvc
             goos: windows
             goarch: arm64
             sidecarExt: ".exe"
+            sidecarLdflags: "-H=windowsgui"
 
     steps:
       - name: Checkout
@@ -89,7 +95,7 @@ jobs:
         run: |
           mkdir -p desktop/src-tauri/binaries
           output="desktop/src-tauri/binaries/tunnel-daemon-${{ matrix.target }}${{ matrix.sidecarExt }}"
-          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} CGO_ENABLED=0 GOCACHE="${RUNNER_TEMP}/go-build" go build -buildvcs=false -o "${output}" ./cmd/tunnel-daemon
+          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} CGO_ENABLED=0 GOCACHE="${RUNNER_TEMP}/go-build" go build -buildvcs=false -ldflags="${{ matrix.sidecarLdflags }}" -o "${output}" ./cmd/tunnel-daemon
           chmod +x "${output}"
 
       - name: Build and upload desktop bundles

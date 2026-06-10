@@ -4,10 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MM Tunnel</title>
-    <link rel="stylesheet" href="./src/styles.css" />
+    <script>
+      (() => {
+        const mode = localStorage.getItem("mmtunnel.theme") || "system";
+        const systemDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+        if (mode === "dark" || (mode === "system" && systemDark)) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
   </head>
   <body>
-    <main id="app"></main>
-    <script type="module" src="./src/app.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

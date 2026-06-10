@@ -1,161 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  color: #1f2933;
-  background: #eef2f6;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --background: 210 24% 96%;
+  --foreground: 215 24% 17%;
+  --card: 0 0% 100%;
+  --card-foreground: 215 24% 17%;
+  --primary: 201 96% 32%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 20% 92%;
+  --secondary-foreground: 215 24% 20%;
+  --muted: 210 20% 92%;
+  --muted-foreground: 215 12% 43%;
+  --accent: 168 38% 88%;
+  --accent-foreground: 174 62% 20%;
+  --destructive: 0 72% 43%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 210 18% 84%;
+  --input: 210 18% 78%;
+  --ring: 201 96% 36%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 220 20% 10%;
+  --foreground: 210 20% 92%;
+  --card: 220 18% 14%;
+  --card-foreground: 210 20% 92%;
+  --primary: 190 84% 42%;
+  --primary-foreground: 210 24% 8%;
+  --secondary: 218 14% 21%;
+  --secondary-foreground: 210 20% 92%;
+  --muted: 218 14% 21%;
+  --muted-foreground: 214 12% 68%;
+  --accent: 165 28% 22%;
+  --accent-foreground: 154 44% 86%;
+  --destructive: 0 62% 48%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 218 14% 26%;
+  --input: 218 14% 30%;
+  --ring: 190 84% 44%;
+}
+
+* {
+  border-color: hsl(var(--border));
 }
 
 body {
   margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: hsl(var(--background));
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
-button {
-  border: 1px solid #b9c3cf;
-  background: #ffffff;
-  border-radius: 6px;
-  padding: 7px 12px;
-  cursor: pointer;
+.status-badge {
+  text-transform: capitalize;
 }
 
-input {
-  border: 1px solid #c8d1dc;
-  border-radius: 6px;
-  padding: 8px 10px;
-  min-width: 0;
+.status-connected,
+.status-registered {
+  border-color: hsl(148 45% 72%);
+  background: hsl(148 52% 90%);
+  color: hsl(150 58% 24%);
 }
 
-.shell {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 24px;
+.dark .status-connected,
+.dark .status-registered {
+  border-color: hsl(148 35% 38%);
+  background: hsl(150 36% 18%);
+  color: hsl(148 52% 76%);
 }
 
-.topbar,
-.toolbar,
-.panel {
-  background: #ffffff;
-  border: 1px solid #d9e1ea;
-  border-radius: 8px;
+.status-reconnecting,
+.status-connecting,
+.status-pending {
+  border-color: hsl(42 72% 70%);
+  background: hsl(43 86% 91%);
+  color: hsl(36 78% 28%);
 }
 
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 20px;
+.dark .status-reconnecting,
+.dark .status-connecting,
+.dark .status-pending {
+  border-color: hsl(42 45% 38%);
+  background: hsl(38 42% 18%);
+  color: hsl(43 80% 74%);
 }
 
-h1,
-h2,
-p {
-  margin: 0;
+.status-error,
+.status-failed {
+  border-color: hsl(0 66% 78%);
+  background: hsl(0 72% 93%);
+  color: hsl(0 70% 34%);
 }
 
-h1 {
-  font-size: 24px;
+.dark .status-error,
+.dark .status-failed {
+  border-color: hsl(0 46% 42%);
+  background: hsl(0 42% 18%);
+  color: hsl(0 76% 78%);
 }
 
-h2 {
-  font-size: 16px;
-}
-
-.topbar p {
-  margin-top: 6px;
-  color: #667485;
-}
-
-.status,
-.badge {
-  border-radius: 999px;
-  padding: 4px 10px;
-  background: #e9eef5;
-}
-
-.connected,
-.registered {
-  background: #dff5e8;
-  color: #17633a;
-}
-
-.error,
-.failed {
-  background: #fde2e2;
-  color: #9f1f1f;
-}
-
-.toolbar {
-  margin-top: 14px;
-  padding: 12px;
-  display: flex;
-  gap: 8px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 14px;
-  margin-top: 14px;
-}
-
-.panel {
-  padding: 16px;
-  margin-top: 14px;
-}
-
-.grid .panel {
-  margin-top: 0;
-}
-
-label {
-  display: grid;
-  gap: 6px;
-  margin-top: 12px;
-  color: #526171;
-}
-
-label input {
-  color: #1f2933;
-}
-
-.actions,
-.section-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: 14px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 12px;
-}
-
-th,
-td {
-  border-bottom: 1px solid #e3e9f0;
-  padding: 8px;
-  text-align: left;
-}
-
-td input:not([type="checkbox"]) {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.events {
-  margin: 12px 0 0;
-  padding-left: 22px;
-  color: #526171;
-}
-
-@media (max-width: 860px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+.status-stopped,
+.status-disabled,
+.status-unknown {
+  border-color: hsl(var(--border));
+  background: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
 }

@@ -11,6 +11,10 @@ export function blankProfile() {
   };
 }
 
+export function blankTunnel() {
+  return { id: "", name: "", publicPath: "/api", target: "http://127.0.0.1:3000", stripPath: true, enabled: true };
+}
+
 export function profileToPayload(profile) {
   return {
     ...profile,
@@ -42,4 +46,8 @@ export function renderStatusLabel(state) {
     error: "Error",
   };
   return labels[state] || "Unknown";
+}
+
+export function slug(value, fallback = "profile") {
+  return String(value).trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || fallback;
 }

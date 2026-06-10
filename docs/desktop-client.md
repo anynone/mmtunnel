@@ -5,7 +5,7 @@ The desktop client is a local control plane for the existing Go tunnel client.
 ## Architecture
 
 ```text
-Tauri desktop UI
+Tauri desktop UI (React + shadcn/ui-style components)
   |
   | http://127.0.0.1:19081
   | server-sent events
@@ -21,6 +21,8 @@ Tunnel server
 ```
 
 The desktop UI does not require users to edit YAML for normal operation. Users configure the server URL, client ID, token, reconnect interval, and tunnels through forms. The daemon persists those settings in a local profile store.
+
+The frontend is built with React and Vite. UI primitives live in `desktop/src/components/ui` and follow shadcn/ui conventions: local editable components, Tailwind CSS utility classes, and CSS variables for light and dark themes.
 
 ## Profile Store
 
@@ -61,6 +63,13 @@ cd desktop
 npm run build
 ```
 
+Run the frontend during development:
+
+```bash
+cd desktop
+npm run dev
+```
+
 Run frontend tests:
 
 ```bash
@@ -81,6 +90,18 @@ npm run tauri:dev
 npm run tauri:build
 ```
 
+When building a Windows desktop bundle manually, build the daemon sidecar with the Windows GUI subsystem so it does not open a console window when Tauri starts it:
+
+```powershell
+New-Item -ItemType Directory -Force desktop\src-tauri\binaries | Out-Null
+$env:GOOS='windows'
+$env:GOARCH='amd64'
+$env:CGO_ENABLED='0'
+go build -buildvcs=false -ldflags="-H=windowsgui" -o desktop\src-tauri\binaries\tunnel-daemon-x86_64-pc-windows-msvc.exe .\cmd\tunnel-daemon
+cd desktop
+npm run tauri:build -- --target x86_64-pc-windows-msvc --bundles nsis
+```
+
 ## Tunnel Enabled Toggle
 
 Each tunnel has a configured `enabled` value and a runtime status.
@@ -91,6 +112,20 @@ enabled=false -> kept in profile, not registered
 ```
 
 For MVP, changing a tunnel enabled state while the runtime is running restarts the runtime. During restart, all tunnels may be briefly unavailable and in-flight HTTP/WebSocket sessions may be interrupted.
+
+## Appearance Settings
+
+The desktop Settings view includes an appearance control with three modes:
+
+```text
+system -> follows the operating system color scheme
+light  -> always uses the light theme
+dark   -> always uses the dark theme
+```
+
+The selected mode is stored in `localStorage` as `mmtunnel.theme`. Dark mode is applied by adding the `dark` class to the document root, using the same CSS-variable approach as shadcn/ui.
+
+The Settings view also keeps the local daemon URL override used by development builds. It is stored as `mmtunnel.daemon`.
 
 ## CLI YAML Compatibility
 
